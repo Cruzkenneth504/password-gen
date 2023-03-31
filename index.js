@@ -65,4 +65,5 @@ function writePassword() {
     password.value = randomString;
 
 }
-
+//invokes function//
+writePassword()
