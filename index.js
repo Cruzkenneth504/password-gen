@@ -1,67 +1,68 @@
-// Assignment Code
+//querySelector selects first element inside doc//
+//querySelectorAll selects elements that match//
+
 var generateBtn = document.querySelector("#generate");
-
-const lowerCase = "abcdefghjkopqrstuxyz";
-const upperCase = "ABCDEFGHJKPQRSTUXYZ";
-const numbers = "0123456789"
-const speaciaCharcters = "~`!@#$%^&*()-_+={}[]|\;:<>,./?";
-const pwLenght ="";
+var password = document.querySelector("#password");
 
 
-// Write password to the #password input
+var specialCharacters = "!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~";//string//
+var lowercaseAlphabet = "abcdefghijklmnopqrstuvwxyz";//string//
+var uppercaseAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";//string//
+var numbers = "0123456789";//number//
+var optionsVariable = "";//undifine value
+
+
+generateBtn.addEventListener("click", writePassword);//add event listener so wehn click add generates password
+
 function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+//adds statements that will permform told task//
+    password.value === "";
+    var randomString = "";
 
-  passwordText.value = password;
-
-}
-
-function generatePassword() {
-  userPassword = "";
-  passwordCharacters = ""
-
-  let pwLenght = prompt("Select password length. (8-10 Charachters)");
- 
-  if (pwLenght >= 8 && pwLenght <= 20) {
-    password.lenght = pwLenght;
- 
-  var isLow = confirm("Include lowercase letters in password ");
-  var isUpp = confirm("Include uppercase letters in password");
-  var isNum = confirm("Include numbers in password");
-  var Chartset = confirm("Include special characters in password");
-}else{
-  alert("Please Select a password between 8-20 characters")
-}
+    var iSlowercase = confirm("Would you like your password to contain lowercase letters?");
+    var iSuppercase = confirm("Would you like  your password to contain uppercase letters?");
+    var iSnum = confirm("Would you like your password to contain numbers?");
+    var iSspecialChar = confirm("Would you like to include special characters?");
+    var iSpasswordLength = prompt("Choose a password length of at least 8 characters and no more than 128 characters.");
 
 
-if (isLow === true) {
-passwordCharacters += lowerCase;
-}
-
-if (isUpp === true) {
-  passwordCharacters += upperCase;
-  }
-  
-  if (isNum === true) {
-    passwordCharacters += numbers;
+    //"If" statement returns true(Boleean) values//
+    //*//
+    if (iSpasswordLength < 8 || iSpasswordLength > 128) {
+        alert("Your password is not between 8 characters and 128 characters. Please try again.");
+        var iSpasswordLength = prompt("Choose a password length of at least 8 characters and no more than 128 characters.");
     }
-    
-    if (isCharset === true) {
-      passwordCharacters +=  speaciaCharcters;
-      }
-      
-      else { 
-        alert("Error: connot generate password")
-      }
 
-for (var i = 0; i < pwLenght; i++){
-  userPassword += passwordCharacters[Math.floor(Math.random() * passwordCharacters.lenght)]
+    //"else if is code  block that executes if statement is false"//
+    else if (iSlowercase === false && iSuppercase === false && iSnum === false && iSspecialChar === false) {
+     
+
+    }
+   
+    if (iSlowercase) {
+        optionsVariable += lowercaseAlphabet;
+    }
+
+    if (iSuppercase) {
+        optionsVariable += uppercaseAlphabet;
+    }
+
+    if (iSnum) {
+        optionsVariable += numbers;
+    }
+
+    if (iSspecialChar) {
+        optionsVariable += specialCharacters;
+    }
+        //"Forloops"  around code blocks 
+    for (var i = 0; i < iSpasswordLength; i++) {
+        //chartAt returns characters specific index position//
+        //Math.floor its rounds given number input //
+        //Math.random its returns numbers greater than or equal to 0 and less than 1,
+        randomString += optionsVariable.charAt(Math.floor(Math.random() * optionsVariable.length));
+    }
+
+    password.value = randomString;
+
 }
-return userPassword
-
-}
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
 
